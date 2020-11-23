@@ -1,0 +1,674 @@
+﻿[PMC Globals]|None||
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|LoginOutlook
+Context=None|
+Groups=Start:1
+01|[Assign Variable]|pathImg := C:\Users\pdi\Desktop\Screenshots\|1|0|Variable|||||1|
+02|[Assign Variable]|pathDescargas := C:\Users\pdi\Downloads\|1|0|Variable|||||3|
+03|[Assign Variable]|pathComprobantes := C:\Users\pdi\Desktop\Comprobantes\|1|0|Variable|||||4|
+4|[Assign Variable]|pathImg := C:\Users\Inter-Telco\Desktop\img\|1|0|Variable|||||5|
+5|[Assign Variable]|pathDescargas := C:\Users\Inter-Telco\Downloads\|1|0|Variable|||||7|
+6|[Assign Variable]|pathComprobantes := C:\Users\Inter-Telco\Desktop\Comprobantes\|1|0|Variable|||||8|
+7|[LoopStart]|%pathComprobantes%*.*`, F|1|0|LoopFilePattern|||||9|
+8|FileDelete|%pathComprobantes%%A_LoopFileName%|1|0|FileDelete|||||11|
+09|[MsgBox]|%A_LoopFileName%|1|0|MsgBox|0||||12|
+10|[LoopEnd]|LoopEnd|1|0|Loop|||||14|
+11|Method:Navigate:|https://outlook.live.com/owa/|1|0|IECOM_Set|:|LoadWait|||16|
+12|Method:Click:TagName||1|0|IECOM_Set|A:8|LoadWait|||21|
+13|[Assign Variable]|user := camilo.lainez@gco.com.co|1|0|Variable|||||23|
+14|[Assign Variable]|password := Sep/2019***`n|1|0|Variable|||||24|
+15|[Pause]||1|500|Sleep|||||29|
+16|Continue, Continue, FoundX, FoundY, 0|0, 0, 1920, 1080, %pathImg%Screen_20200922080729.png|1|0|ImageSearch|UntilFound|Window|||30|
+17|[Pause]||1|500|Sleep|||||36|
+18|If Image/Pixel Not Found||1|0|If_Statement|||||37|
+19|F5|{F5}|1|0|Send|||||39|
+20|[Pause]||1|2000|Sleep|||||40|
+21|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200921211617.png|1|0|ImageSearch|UntilFound|Window|||41|
+22|[End If]|EndIf|1|0|If_Statement|||||50|
+23|[Pause]||1|2000|Sleep|||||51|
+24|s|{s}|1|0|Send|||||52|
+25|[Pause]||1|500|Sleep|||||53|
+26|Property:InnerText:TagName|%user%|1|0|IECOM_Set|INPUT:0||||54|
+27|Method:Click:ID||1|0|IECOM_Set|idSIButton9:||||55|
+028|WinWait|2|1|333|WinWait||ahk_class IEFrame|||56|
+29|[Pause]||1|3000|Sleep|||||59|
+30|a|{a}|1|0|Send|||||61|
+31|[Pause]||1|500|Sleep|||||62|
+32|Property:InnerText:TagName|%password%|1|0|IECOM_Set|INPUT:9||||63|
+33|Method:Click:ID||1|0|IECOM_Set|idSIButton9:|LoadWait|||64|
+34|[Pause]||1|1000|Sleep|||||66|
+35|Continue, Continue, FoundX, FoundY, 0|0, 0, 1920, 1080, %pathImg%Screen_20200920172647.png|1|0|ImageSearch||Window|||67|
+36|If Image/Pixel Found||1|0|If_Statement|||||69|
+37|Method:Click:TagName||1|0|IECOM_Set|INPUT:6||||71|
+38|Method:Click:TagName||1|0|IECOM_Set|INPUT:7||||72|
+39|[End If]|EndIf|1|0|If_Statement|||||73|
+40|[Pause]||1|6000|Sleep|||||74|
+41|[Assign Variable]|endLoop := 0|1|0|Variable|||||75|
+42|[Assign Variable]|contSPAN := 0|1|0|Variable|||||76|
+43|[Pause]||1|6000|Sleep|||||77|
+44|[LoopStart]|LoopStart|3|0|Loop|||||78|
+45|End|{End}|1|0|Send|||||80|
+46|[Pause]||1|5000|Sleep|||||81|
+47|[LoopEnd]|LoopEnd|1|0|Loop|||||82|
+048|End|{End}|1|0|Send|||||83|
+049|[Pause]||1|2000|Sleep|||||85|
+50|[LoopStart]|LoopStart|2000|0|Loop|||||86|
+51|[Assign Variable]|banentrada := " "|1|0|Variable|||||89|
+52|[Add Variable]|contSPAN += 1|1|0|Variable|||||90|
+53|Property:InnerText:TagName|banentrada|1|0|IECOM_Get|SPAN:%contSPAN%||||91|
+054|[MsgBox]|%banentrada%|1|0|MsgBox|0||||92|
+55|Evaluate Expression|banentrada=="Pago online"|1|0|If_Statement|0||||94|
+056|[MsgBox]|%contSPAN%|1|0|MsgBox|0||||97|
+57|Break||1|0|Break|||||99|
+58|[End If]|EndIf|1|0|If_Statement|||||101|
+59|[LoopEnd]|LoopEnd|1|0|Loop|||||102|
+60|Method:Click:TagName||1|0|IECOM_Set|SPAN:%contSPAN%||||103|
+61|[Goto]|DescargaPDF|1|0|Goto|||||104|
+62|Alt + F4|{Alt Down}{F4}{Alt Up}|1|0|Send|||||105|
+63|[Pause]||1|2000|Sleep|||||106|
+64|[Goto]|servicioPython|1|0|Goto|||||107|
+65|Alt + F4|{Alt Down}{F4}{Alt Up}|1|0|Send|||||108|
+66|[Pause]||1|2000|Sleep|||||109|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|DescargaPDF
+Context=None|
+Groups=Start:1
+01|[MsgBox]|Inicia Macro3`n|1|0|MsgBox|0||||1|
+2|[Assign Variable]|textSPAN2 := ""|1|0|Variable|||||7|
+3|[Assign Variable]|contSPAN2 := 1|1|0|Variable|||||9|
+4|[LoopStart]|LoopStart|2000|0|Loop|||||10|
+5|[Add Variable]|contSPAN2 += 1|1|0|Variable|||||12|
+6|Property:InnerText:TagName|textSPAN2|1|0|IECOM_Get|SPAN:%contSPAN2%||||13|
+7|Evaluate Expression|textSPAN2 == "Descargar todo"|1|0|If_Statement|SPAN:%contSPAN2%||||17|
+8|[Pause]||1|1000|Sleep|||||19|
+09|[MsgBox]|%textSPAN2%|1|0|MsgBox|0||||20|
+10|Method:Click:TagName||1|0|IECOM_Set|SPAN:%contSPAN2%||||22|
+11|[Pause]||1|500|Sleep|||||24|
+12|Break||1|0|Break|||||25|
+13|[End If]|EndIf|1|0|If_Statement|||||26|
+14|[LoopEnd]|LoopEnd|1|0|Loop|||||27|
+15|[Pause]||1|1000|Sleep|||||28|
+16|Alt + g|{Alt Down}{g}{Alt Up}|1|0|Send|||||29|
+17|[Pause]||1|3000|Sleep|||||30|
+18|Alt + b|{Alt Down}{b}{Alt Up}|1|0|Send|||||31|
+19|[Pause]||1|3000|Sleep|||||32|
+20|Control + c|{Control Down}{c}{Control Up}|1|0|Send|||||33|
+21|[Pause]||1|4000|Sleep|||||34|
+22|[Unzip]|%Clipboard%|1|0|Unzip|%pathComprobantes%||||35|
+23|[Pause]||1|6000|Sleep|||||36|
+
+[PMC Code v5.3.5]|F4||1|Window,2,Fast,0,1,Input,-1,-1,1|1|servicioPython
+Context=None|
+Groups=Start:1
+1|[Assign Variable]|pathImg := C:\img\|1|0|Variable|||||1|
+02|[Assign Variable]|pathImg := C:\Users\Soporte\Desktop\img\|1|0|Variable|||||2|
+3|[Assign Variable]|pathDescargas := C:\Users\Soporte\Downloads\|1|0|Variable|||||4|
+4|[Assign Variable]|pathComprobantes := C:\Users\Soporte\Desktop\Comprobantes\|1|0|Variable|||||6|
+5|[Pause]||1|500|Sleep|||||7|
+6|Run|http://35.175.103.14:3000/|1|0|Run|||||8|
+7|WinWaitActive||1|333|WinWaitActive||ahk_class Chrome_WidgetWin_1|||9|
+8|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200915172003.png|1|0|ImageSearch|UntilFound|Window|||11|
+9|[Pause]||1|300|Sleep|||||20|
+10|[LoopStart]|%pathComprobantes%*.*`, F|1|0|LoopFilePattern|||||21|
+11|[Pause]||1|300|Sleep|||||23|
+12|Evaluate Expression|A_LoopFileExt=="pdf"|1|0|If_Statement|0||||24|
+13|[Pause]||1|300|Sleep|||||26|
+14|[LoopStart]|A_LoopFileName`, %A_Space%_`, |1|0|LoopParse|||||27|
+15|Evaluate Expression|%A_LoopField%=="rechazo" or "Rechazo"|1|0|If_Statement|||||29|
+16|[Control]|%A_LoopFileFullPath%|1|0|ControlSetText|Edit1|ahk_class #32770|||31|
+17|Break||1|0|Break|||||32|
+18|[End If]|EndIf|1|0|If_Statement|||||33|
+19|[LoopEnd]|LoopEnd|1|0|Loop|||||34|
+20|[Pause]||1|300|Sleep|||||35|
+21|[End If]|EndIf|1|0|If_Statement|||||36|
+022|[MsgBox]|%A_LoopFileExt%`,%A_LoopFileFullPath%|1|0|MsgBox|0||||37|
+23|[LoopEnd]|LoopEnd|1|0|Loop|||||39|
+24|[Pause]||1|300|Sleep|||||41|
+25|Left Click|Left, 1,  NA|1|10|ControlClick|Button1|ahk_class #32770|||42|
+26|[Pause]||1|300|Sleep|||||44|
+27|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200929104647.png|1|0|ImageSearch|UntilFound|Screen|||45|
+28|[Pause]||1|60000|Sleep|||||54|
+29|Continue, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%coprobantes.PNG|1|0|ImageSearch|UntilFound|Window|||55|
+30|If Image/Pixel Found||1|0|If_Statement|||||62|
+31|[LoopStart]|LoopStart|3|0|Loop|||||64|
+32|[Pause]||1|300|Sleep|||||66|
+33|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||67|
+34|[LoopEnd]|LoopEnd|1|0|Loop|||||69|
+35|Control + c|{Control Down}{c}{Control Up}|1|0|Send|||||70|
+36|[Pause]||1|3000|Sleep|||||71|
+037|Run|notepad|1|0|Run|||||72|
+038|[Pause]||1|2000|Sleep|||||74|
+039|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||75|
+040|[Pause]||1|3000|Sleep|||||77|
+041|Control + g|{Control Down}{g}{Control Up}|1|0|Send|||||78|
+042|[Pause]||1|2000|Sleep|||||80|
+043|[Control]|%pathComprobantes%result.json|1|0|ControlSetText|Edit1|ahk_class #32770|||81|
+044|[Pause]||1|2000|Sleep|||||82|
+045|Left Click|Left, 1,  NA|1|10|ControlClick|Button2|ahk_class #32770|||83|
+046|[Pause]||1|2000|Sleep|||||85|
+47|Alt + F4|{Alt Down}{F4}{Alt Up}|1|0|Send|||||86|
+48|[Pause]||1|1000|Sleep|||||88|
+49|[End If]|EndIf|1|0|If_Statement|||||89|
+50|[Goto]|Macro7|1|0|Goto|||||90|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|Macro7
+Context=None|
+Groups=Start:1
+01|[Assign Variable]|pathImg := C:\Users\Soporte\Desktop\img\|1|0|Variable|||||1|
+2|[Assign Variable]|pathImg := C:\img\|1|0|Variable|||||3|
+3|[Assign Variable]|pathDescargas := C:\Users\Soporte\Downloads\|1|0|Variable|||||5|
+4|[Assign Variable]|pathComprobantes := C:\Users\Soporte\Desktop\Comprobantes\|1|0|Variable|||||6|
+05|[Assign Variable]|result := ""|1|0|Variable|||||7|
+06|FileRead|result, %pathComprobantes%result.json|1|0|FileRead|||||9|
+7|[Assign Variable]|banImg := 0|1|0|Variable|||||10|
+8|[Assign Variable]|abonados := 1|1|0|Variable|||||12|
+9|[Assign Variable]|cuenta := ""|1|0|Variable|||||13|
+10|[Assign Variable]|beneficiario := ""|1|0|Variable|||||14|
+11|[Assign Variable]|cc := ""|1|0|Variable|||||15|
+12|[Assign Variable]|valor := ""|1|0|Variable|||||16|
+13|[Assign Variable]|img := 0|1|0|Variable|||||17|
+14|[Assign Variable]|referencia := ""|1|0|Variable|||||18|
+15|[Assign Variable]|page := ""|1|0|Variable|||||19|
+16|[Assign Variable]|resultArray := []|1|0|Variable|Expression||||20|
+17|[LoopStart]|Clipboard`, ``,.`, "{}|1|0|LoopParse|||||21|
+18|[LoopStart]|A_LoopField`, :``,`, "|1|0|LoopParse|||||23|
+019|[MsgBox]|%A_LoopField%|1|0|MsgBox|0||||25|
+20|Push|_null := A_LoopField|1|0|Method|resultArray||||27|
+21|[LoopEnd]|LoopEnd|1|0|Loop|||||29|
+22|[LoopEnd]|LoopEnd|1|0|Loop|||||30|
+023|[Pause]||1|1000|Sleep|||||31|
+024|Alt + F4|{Alt Down}{F4}{Alt Up}|1|0|Send|||||33|
+25|[Pause]||1|1000|Sleep|||||34|
+26|loginDynamics|_null := pathImg|1|0|Function|||||36|
+27|[Pause]||1|500|Sleep|||||37|
+028|[Assign Variable]|indexItem := 0|1|0|Variable|||||38|
+29|[LoopStart]|resultArray`, key`, value|1|0|For|||||40|
+030|[MsgBox]|%value%`,%key%|1|0|MsgBox|0||||43|
+31|Compare Variables|value == "No_Abonados"|1|0|If_Statement|||||45|
+32|[Assign Variable]|abonados := 0|1|0|Variable|||||48|
+33|[ElseIf] Compare Variables|value == "numero de cuenta"|1|0|If_Statement|||||49|
+34|[Assign Variable]|cuenta := % resultArray[%A_Index%+1]|1|0|Variable|||||52|
+35|[ElseIf] Compare Variables|value == "nombre de beneficiario"|1|0|If_Statement|||||53|
+36|[Assign Variable]|beneficiario := % resultArray[%A_Index%+1]|1|0|Variable|||||56|
+37|[ElseIf] Compare Variables|value == "documento"|1|0|If_Statement|||||57|
+38|[Assign Variable]|cc := % resultArray[%A_Index%+1]|1|0|Variable|||||60|
+39|[ElseIf] Compare Variables|value == "valor"|1|0|If_Statement|||||61|
+40|[Assign Variable]|valor := % resultArray[%A_Index%+1]|1|0|Variable|||||64|
+41|[Concatenate Variable]|valor .= .|1|0|Variable|||||65|
+42|[Concatenate Variable]|valor .= % resultArray[%A_Index%+2]|1|0|Variable|||||66|
+43|[ElseIf] Compare Variables|value == "referencia"|1|0|If_Statement|||||67|
+44|[Assign Variable]|referencia := % resultArray[%A_Index%+1]|1|0|Variable|||||70|
+45|[ElseIf] Compare Variables|value == "img"|1|0|If_Statement|||||71|
+46|[Assign Variable]|banImg := 1|1|0|Variable|||||74|
+47|[ElseIf] Compare Variables|banImg == "1"|1|0|If_Statement|||||75|
+48|[Assign Variable]|img := %value%|1|0|Variable|||||78|
+49|[Assign Variable]|banImg := 0|1|0|Variable|||||79|
+50|[ElseIf] Compare Variables|value == "page"|1|0|If_Statement|||||80|
+51|[Assign Variable]|page := % resultArray[%A_Index%+1]|1|0|Variable|||||83|
+52|[Pause]||1|1000|Sleep|||||84|
+053|[MsgBox]|%pathImg%|1|0|MsgBox|0||||85|
+054|[Pause]||1|1000|Sleep|||||87|
+55|auxAbonado|_null := cuenta,beneficiario,cc,valor,referencia,img,page,pathImg,pathDescargas,abonados,pathComprobantes|1|0|Function|||||88|
+56|[Pause]||1|1000|Sleep|||||90|
+057|Evaluate Expression|img != 9223372036854775807|1|0|If_Statement|||||91|
+058|[End If]|EndIf|1|0|If_Statement|||||94|
+59|[End If]|EndIf|1|0|If_Statement|||||95|
+60|[LoopEnd]|LoopEnd|1|0|Loop|||||97|
+061|[MsgBox]|% resultArray[%indexItem%+1]`,% resultArray[%indexItem%+2]`n|1|0|MsgBox|0||||98|
+062|[MsgBox]|%cc%`,%valor%`,%referencia%|1|0|MsgBox|0||||104|
+063|[Concatenate Variable]|img .= % resultArray[%A_Index%+2]|1|0|Variable|||||105|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|b64Jpg()
+Context=None|
+Groups=Start:1
+1|[FuncParameter]|img|1|0|FuncParameter|||||1|
+2|[FuncParameter]|pathImg|1|0|FuncParameter|||||1|
+3|[FuncParameter]|pathDescargas|1|0|FuncParameter|||||1|
+4|[FunctionStart]|b64Jpg|1|0|UserFunction|Local| / |||1|
+5|[Pause]||1|1000|Sleep|||||3|
+06|[MsgBox]|%pathDescargas%|1|0|MsgBox|0||||4|
+7|FileDelete|%pathDescargas%test-download.png|1|0|FileDelete|||||6|
+8|[Pause]||1|1000|Sleep|||||8|
+9|Run|http://35.175.103.14:5000/|1|0|Run|||||9|
+10|[Pause]||1|500|Sleep|||||10|
+11|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022084558.png|1|0|ImageSearch|UntilFound|Window|||11|
+12|[Pause]||1|500|Sleep|||||20|
+13|[Assign Variable]|Clipboard := images/%img%.png|1|0|Variable|||||21|
+14|[Pause]||1|1000|Sleep|||||22|
+15|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||23|
+16|[Pause]||1|1000|Sleep|||||24|
+17|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022084614.png|1|0|ImageSearch|UntilFound|Window|||25|
+18|[Pause]||1|1000|Sleep|||||34|
+19|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022084714.png|1|0|ImageSearch|UntilFound|Window|||35|
+20|[Pause]||1|3500|Sleep|||||44|
+21|Alt + F4|{Alt Down}{F4}{Alt Up}|1|0|Send|||||45|
+22|[Pause]||1|500|Sleep|||||46|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|loginDynamics()
+Context=None|
+Groups=Start:1
+1|[FuncParameter]|pathImg|1|0|FuncParameter|ByRef||||1|
+2|[FunctionStart]|loginDynamics|1|0|UserFunction|Local| / |||1|
+3|Method:Navigate:|https://gco.crm2.dynamics.com/|1|0|IECOM_Set|:|LoadWait|||3|
+4|[Pause]||1|2000|Sleep|||||8|
+5|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201021164928.png|1|0|ImageSearch||Window|||9|
+6|[Pause]||1|2000|Sleep|||||14|
+7|Continue, Continue, FoundX, FoundY, 0|0, 0, 1920, 1080, C:\Users\Soporte\Desktop\img\iniciar.PNG|1|0|ImageSearch||Window|||15|
+8|If Image/Pixel Not Found||1|0|If_Statement|||||17|
+9|F5|{F5}|1|0|Send|||||19|
+10|[Pause]||1|2000|Sleep|||||20|
+11|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200922121429.png|1|0|ImageSearch|UntilFound|Window|||21|
+12|[End If]|EndIf|1|0|If_Statement|||||30|
+13|[Pause]||1|3000|Sleep|||||31|
+14|a|{a}|1|0|Send|||||32|
+15|[Pause]||1|500|Sleep|||||33|
+16|Backspace|{Backspace}|1|0|Send|||||34|
+17|[Pause]||1|500|Sleep|||||35|
+18|[Assign Variable]|userDynamics := agentecrm2.ext@gco.com.co|1|0|Variable|||||36|
+19|[Assign Variable]|passwordDynamics := Ag3nt3_2018*|1|0|Variable|||||37|
+20|Property:InnerText:TagName|%userDynamics%|1|0|IECOM_Set|INPUT:0||||38|
+21|[Pause]||1|500|Sleep|||||39|
+22|Enter|{Enter}|1|0|Send|||||40|
+023|Method:Click:TagName||1|0|IECOM_Set|INPUT:3||||41|
+24|[Pause]||1|1000|Sleep|||||43|
+25|b|{b}|1|0|Send|||||45|
+26|Backspace|{Backspace}|1|0|Send|||||46|
+27|Property:InnerText:TagName|%passwordDynamics%|1|0|IECOM_Set|INPUT:9||||46|
+28|Method:Click:TagName||1|0|IECOM_Set|INPUT:10||||47|
+29|[Pause]||1|2000|Sleep|||||48|
+30|Continue, Continue, FoundX, FoundY, 0|0, 0, 1920, 1080, %pathImg%Screen_20200922110820.png|1|0|ImageSearch||Window|||49|
+31|If Image/Pixel Found||1|0|If_Statement|||||51|
+032|[Pause]||1|1000|Sleep|||||53|
+33|Method:Click:TagName||1|0|IECOM_Set|INPUT:6||||55|
+034|[Pause]||1|1000|Sleep|||||57|
+35|Method:Click:TagName||1|0|IECOM_Set|INPUT:7||||59|
+36|[End If]|EndIf|1|0|If_Statement|||||61|
+37|[Pause]||1|5000|Sleep|||||62|
+38|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200916211549.png|1|0|ImageSearch|UntilFound|Window|||63|
+39|[Pause]||1|2000|Sleep|||||72|
+40|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||73|
+41|[Pause]||1|2000|Sleep|||||82|
+42|Continue, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201001114340.png|1|0|ImageSearch|UntilFound|Window|||83|
+43|If Image/Pixel Found||1|0|If_Statement|||||90|
+44|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||92|
+45|[End If]|EndIf|1|0|If_Statement|||||94|
+046|[MsgBox]|%codhtml%|1|0|MsgBox|0||||95|
+47|[Pause]||1|4000|Sleep|||||97|
+48|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200921213437.png|1|0|ImageSearch|UntilFound|Window|||99|
+49|[Pause]||1|2000|Sleep|||||108|
+50|End|{End}|1|0|Send|||||109|
+51|[Pause]||1|2000|Sleep|||||110|
+52|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200921213703.png|1|0|ImageSearch||Window|||111|
+53|If Image/Pixel Not Found||1|0|If_Statement|||||116|
+54|[Pause]||1|2000|Sleep|||||118|
+55|End|{End}|1|0|Send|||||119|
+56|[Pause]||1|2000|Sleep|||||120|
+57|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200921213703.png|1|0|ImageSearch||Window|||121|
+58|[End If]|EndIf|1|0|If_Statement|||||126|
+59|[Pause]||1|1000|Sleep|||||127|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|auxSarch()
+Context=None|
+Groups=Start:1
+1|[FuncParameter]|cuenta|1|0|FuncParameter|||||1|
+2|[FuncParameter]|beneficiario|1|0|FuncParameter|||||1|
+3|[FuncParameter]|cc|1|0|FuncParameter|||||1|
+4|[FuncParameter]|valor|1|0|FuncParameter|||||1|
+5|[FuncParameter]|referencia|1|0|FuncParameter|||||1|
+6|[FuncParameter]|img|1|0|FuncParameter|||||1|
+7|[FuncParameter]|page|1|0|FuncParameter|||||1|
+8|[FuncParameter]|pathImg|1|0|FuncParameter|||||1|
+9|[FuncParameter]|pathDescargas|1|0|FuncParameter|||||1|
+10|[FuncParameter]|pathComprobantes|1|0|FuncParameter|||||1|
+11|[FunctionStart]|auxSarch|1|0|UserFunction|Local| / |||1|
+12|[Pause]||1|500|Sleep|||||3|
+013|[MsgBox]|estoy en AuxSearch y la cedula es: %cc%|1|0|MsgBox|0||||4|
+14|searchDynamics|comprobante := cuenta,beneficiario,cc,valor,referencia,img,page,pathImg,pathDescargas,pathComprobantes|1|0|Function|||||6|
+15|[Pause]||1|3000|Sleep|||||8|
+016|[MsgBox]|%comprobante%|1|0|MsgBox|0||||9|
+17|Compare Variables|comprobante == 1|1|0|If_Statement|||||11|
+18|FileAppend|`n  nombre:%beneficiario%.Documento:%cc%``,Valor:%valor%``,pagina:%page%hora:%A_Tab%%A_Hour%:%A_Min%:%A_Sec%%A_Tab%, %pathComprobantes%enviados.txt|1|0|FileAppend|||||14|
+19|[Pause]||1|300|Sleep|||||15|
+20|[Else]|Else|1|0|If_Statement|||||16|
+21|searchDynamics|auxComprobante := cuenta,beneficiario,cc,valor,referencia,img,page,pathImg,pathDescargas,pathComprobantes|1|0|Function|||||19|
+22|[Pause]||1|3000|Sleep|||||20|
+23|Compare Variables|auxComprobante == 0|1|0|If_Statement|||||21|
+24|FileAppend|`n  nombre:%beneficiario%.Documento:%cc%``,Valor:%valor%``,pagina:%page%hora:%A_Tab%%A_Hour%:%A_Min%:%A_Sec%%A_Tab%, %pathComprobantes%inconvenientes.txt|1|0|FileAppend|||||23|
+25|[Else]|Else|1|0|If_Statement|||||24|
+26|FileAppend|`n  nombre:%beneficiario%.Documento:%cc%``,Valor:%valor%``,pagina:%page%hora:%A_Tab%%A_Hour%:%A_Min%:%A_Sec%%A_Tab%, %pathComprobantes%enviados.txt|1|0|FileAppend|||||27|
+27|[End If]|EndIf|1|0|If_Statement|||||28|
+28|[End If]|EndIf|1|0|If_Statement|||||29|
+29|[FuncReturn]|comprobante|1|0|FuncReturn|||||30|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|auxAbonado()
+Context=None|
+Groups=Start:1
+1|[FuncParameter]|cuenta|1|0|FuncParameter|||||1|
+2|[FuncParameter]|beneficiario|1|0|FuncParameter|||||1|
+3|[FuncParameter]|cc|1|0|FuncParameter|||||1|
+4|[FuncParameter]|valor|1|0|FuncParameter|||||1|
+5|[FuncParameter]|referencia|1|0|FuncParameter|||||1|
+6|[FuncParameter]|img|1|0|FuncParameter|||||1|
+7|[FuncParameter]|page|1|0|FuncParameter|||||1|
+8|[FuncParameter]|pathImg|1|0|FuncParameter|||||1|
+9|[FuncParameter]|pathDescargas|1|0|FuncParameter|||||1|
+10|[FuncParameter]|abonados|1|0|FuncParameter|||||1|
+11|[FuncParameter]|pathComprobantes|1|0|FuncParameter|||||1|
+12|[FunctionStart]|auxAbonado|1|0|UserFunction|Local| / |||1|
+013|[MsgBox]|%cc% en auxAbonado|1|0|MsgBox|0||||3|
+14|Compare Variables|abonados == 1|1|0|If_Statement|||||5|
+015|[MsgBox]|Lugar de llamada a la funcion de busqueda de cedula y envio de correo|1|0|MsgBox|0||||8|
+16|[Pause]||1|1000|Sleep|||||10|
+17|auxSarch|comprobante := cuenta,beneficiario,cc,valor,referencia,img,page,pathImg,pathDescargas,pathComprobantes|1|0|Function|||||12|
+18|[Pause]||1|1000|Sleep|||||13|
+19|[Else]|Else|1|0|If_Statement|||||14|
+20|FileAppend|`n  nombre:%beneficiario%.Documento:%cc%``,Valor:%valor%``,pagina:%page%hora:%A_Tab%%A_Hour%:%A_Min%:%A_Sec%%A_Tab%, %pathComprobantes%inconvenientes.txt|1|0|FileAppend|||||17|
+21|[End If]|EndIf|1|0|If_Statement|||||18|
+022|Push|_null := % resultArray[%A_Index%+1]|1|0|Method|imagen||||19|
+023|Push|_null := resultArray[A_Index+1]|1|0|Method|imagen||||21|
+024|[Assign Variable]|banImg := 1|1|0|Variable|Expression||||22|
+025|[ElseIf] Compare Variables|banImg = 1|1|0|If_Statement|||||23|
+026|Continue, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201008134856.png|1|0|ImageSearch||Window|||26|
+027|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||29|
+028|Continue, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201008135352.png|1|0|ImageSearch||Window|||31|
+029|[Pause]||1|500|Sleep|||||34|
+030|If Image/Pixel Found||1|0|If_Statement|||||35|
+031|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||37|
+032|[End If]|EndIf|1|0|If_Statement|||||39|
+033|[Pause]||1|1000|Sleep|||||40|
+034|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||41|
+035|[Pause]||1|1500|Sleep|||||50|
+036|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201007154153.png|1|0|ImageSearch||Window|||51|
+037|[Pause]||1|1000|Sleep|||||56|
+038|If Image/Pixel Found||1|0|If_Statement|UntilFound||||57|
+039|Enter|{Enter}|1|0|Send|||||59|
+040|[Pause]||1|500|Sleep|||||60|
+041|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201007151603.png|1|0|ImageSearch|UntilFound|Window|||61|
+042|[Pause]||1|500|Sleep|||||70|
+043|[Assign Variable]|Clipboard := Resuelto.|1|0|Variable|||||71|
+044|[Pause]||1|300|Sleep|||||72|
+045|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||73|
+046|[Pause]||1|500|Sleep|||||74|
+047|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200924082550.png|1|0|ImageSearch|UntilFound|Window|||75|
+048|[Pause]||1|2000|Sleep|||||84|
+049|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201007151912.png|1|0|ImageSearch|UntilFound|Window|||85|
+050|[Pause]||1|3000|Sleep|||||94|
+051|[Else]|Else|1|0|If_Statement|||||95|
+052|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200924082550.png|1|0|ImageSearch|UntilFound|Window|||98|
+053|[End If]|EndIf|1|0|If_Statement|||||107|
+054|[Pause]||1|2000|Sleep|||||108|
+055|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200929114218.png|1|0|ImageSearch|UntilFound|Window|||109|
+056|[Pause]||1|2000|Sleep|||||118|
+057|If Window Active|Mensaje de página web|1|0|If_Statement|Button1||||119|
+058|Left Click|Left, 1,  NA|1|10|ControlClick|Button1|Mensaje de página web|||121|
+059|[Pause]||1|1000|Sleep|||||123|
+060|[End If]|EndIf|1|0|If_Statement|||||124|
+061|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||125|
+062|[Pause]||1|1000|Sleep|||||127|
+063|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||128|
+064|[Pause]||1|2000|Sleep|||||137|
+065|[End If]|EndIf|1|0|If_Statement|||||138|
+066|[Else]|Else|1|0|If_Statement|||||139|
+067|[Assign Variable]|status := 0|1|0|Variable|||||142|
+068|[Pause]||1|3000|Sleep|||||143|
+069|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200923182420.png|1|0|ImageSearch|UntilFound|Window|||144|
+070|[Pause]||1|10000|Sleep|||||153|
+071|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200924143844.png|1|0|ImageSearch|UntilFound|Window|||154|
+072|[Pause]||1|1000|Sleep|||||163|
+073|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||164|
+074|[Pause]||1|1000|Sleep|||||173|
+075|[End If]|EndIf|1|0|If_Statement|||||174|
+076|[FuncReturn]|status|1|0|FuncReturn|||||175|
+
+[PMC Code v5.3.5]|||1|Window,2,Fast,0,1,Input,-1,-1,1|1|searchDynamics()
+Context=None|
+Groups=Iniciar:1
+1|[FuncParameter]|cuenta|1|0|FuncParameter|||||1|
+2|[FuncParameter]|beneficiario|1|0|FuncParameter|||||1|
+3|[FuncParameter]|cc|1|0|FuncParameter|||||1|
+4|[FuncParameter]|valor|1|0|FuncParameter|||||1|
+5|[FuncParameter]|referencia|1|0|FuncParameter|||||1|
+6|[FuncParameter]|img|1|0|FuncParameter|||||1|
+7|[FuncParameter]|page|1|0|FuncParameter|||||1|
+8|[FuncParameter]|pathImg|1|0|FuncParameter|||||1|
+9|[FuncParameter]|pathDescargas|1|0|FuncParameter|||||1|
+10|[FuncParameter]|pathComprobantes|1|0|FuncParameter|||||1|
+11|[FunctionStart]|searchDynamics|1|0|UserFunction|Global| / |||1|
+012|[MsgBox]| estoy en searchDinamycs y esta es la cedula %cc%|1|0|MsgBox|0||||4|
+13|[Assign Variable]|status := 1|1|0|Variable|||||6|
+14|[Pause]||1|6000|Sleep|||||8|
+15|Continue, Continue, FoundX, FoundY, 0|0, 0, 1280, 1024, %pathImg%Screen_20201022080131.png|1|0|ImageSearch||Screen|||9|
+16|If Image/Pixel Not Found||1|0|If_Statement|||||11|
+17|[Pause]||1|2000|Sleep|||||13|
+18|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022080228.png|1|0|ImageSearch|UntilFound|Window|||14|
+19|End|{End}|1|0|Send|||||23|
+20|searchDynamics|auxComprobante := cuenta,beneficiario,cc,valor,referencia,img,page,pathImg,pathDescargas,pathComprobantes|1|0|Function|||||24|
+21|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022095157.png|1|0|ImageSearch|UntilFound|Window|||25|
+22|[End If]|EndIf|1|0|If_Statement|||||34|
+23|[Pause]||1|3000|Sleep|||||35|
+024|[MsgBox]|Antes de Maximizar|1|0|MsgBox|0||||36|
+025|WinMaximize||1|333|WinMaximize||Casos Vista de devoluciones de dinero - Microsoft Dynamics 365 - Internet Explorer|||38|
+26|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022151658.png|1|0|ImageSearch|UntilFound|Window|||40|
+27|[Pause]||1|5000|Sleep|||||50|
+28|Continue, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%filterWhite.PNG|1|0|ImageSearch||Window|||51|
+29|If Image/Pixel Found||1|0|If_Statement|UntilFound||||54|
+30|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||56|
+31|[Pause]||1|2000|Sleep|||||58|
+32|Move|0, 0, 0|1|10|Click|||||59|
+33|[End If]|EndIf|1|0|If_Statement|||||61|
+034|[MsgBox]|buscando filtro negro|1|0|MsgBox|0||||62|
+35|[Pause]||1|1000|Sleep|||||64|
+36|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%blackFilter.PNG|1|0|ImageSearch|UntilFound|Window|||66|
+037|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022080608.png|1|0|ImageSearch|UntilFound|Window|||75|
+38|[Pause]||1|2000|Sleep|||||85|
+39|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022080712.png|1|0|ImageSearch|UntilFound|Window|||87|
+40|[Pause]||1|500|Sleep|||||96|
+41|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022080759.png|1|0|ImageSearch|UntilFound|Window|||97|
+42|[Pause]||1|500|Sleep|||||106|
+43|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%aceptarDD.PNG|1|0|ImageSearch|UntilFound|Window|||107|
+44|[Pause]||1|2000|Sleep|||||116|
+45|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022080849.png|3|0|ImageSearch|UntilFound|Window|||117|
+46|[Pause]||1|3000|Sleep|||||126|
+47|Tab|{Tab}|1|0|Send|||||127|
+48|[Pause]||1|1000|Sleep|||||128|
+49|Enter|{Enter}|1|0|Send|||||129|
+50|[Pause]||1|5000|Sleep|||||130|
+51|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022080916.png|1|0|ImageSearch|UntilFound|Window|||131|
+52|[Pause]||1|1000|Sleep|||||140|
+53|[LoopStart]|LoopStart|5|0|Loop|||||141|
+54|Right|{Right}|1|0|Send|||||143|
+55|[Pause]||1|1000|Sleep|||||144|
+56|[LoopEnd]|LoopEnd|1|0|Loop|||||145|
+57|[Assign Variable]|startX := 0|1|0|Variable|||||146|
+58|[LoopStart]|LoopStart|7|0|Loop|||||147|
+59|Continue, Continue, FoundX, FoundY, 1|%startX%, 0, 1920, 1080, %pathImg%Screen_20201022080940.png|3|0|ImageSearch|UntilFound|Window|||149|
+60|[Assign Variable]|startX := %FoundX%|1|0|Variable|||||156|
+61|[LoopEnd]|LoopEnd|1|0|Loop|||||157|
+62|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||158|
+63|[Pause]||1|300|Sleep|||||160|
+64|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022081032.png|1|0|ImageSearch|UntilFound|Window|||161|
+65|[Pause]||1|2000|Sleep|||||170|
+66|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022081251.png|1|0|ImageSearch|UntilFound|Window|||171|
+67|[Pause]||1|2000|Sleep|||||180|
+68|Continue, Continue, FoundX, FoundY, 0|0, 0, 1280, 1024, %pathImg%selectcc.PNG|1|0|ImageSearch||Window|||181|
+69|[Pause]||1|1000|Sleep|||||183|
+70|If Image/Pixel Found||1|0|If_Statement|||||184|
+71|[Assign Variable]|bccfiltro := 1|1|0|Variable|||||186|
+72|[Pause]||1|1000|Sleep|||||187|
+73|[End If]|EndIf|1|0|If_Statement|||||188|
+74|Down|{Down}|1|0|Send|||||189|
+75|[Pause]||1|500|Sleep|||||190|
+76|Enter|{Enter}|1|0|Send|||||191|
+77|[Pause]||1|500|Sleep|||||192|
+78|Tab|{Tab}|1|0|Send|||||193|
+79|[Pause]||1|1000|Sleep|||||194|
+80|[Assign Variable]|Clipboard := %cc%|1|0|Variable|||||195|
+81|[Pause]||1|1000|Sleep|||||196|
+082|[MsgBox]|%cc%`, Esta es la cedula|1|0|MsgBox|0||||197|
+83|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||199|
+84|[Pause]||1|1000|Sleep|||||201|
+85|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%aceptarCC.PNG|1|0|ImageSearch|UntilFound|Window|||202|
+86|[Pause]||1|4000|Sleep|||||211|
+087|[MsgBox]|Buscanco "Bu"|1|0|MsgBox|0||||212|
+88|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201103103155.png|1|0|ImageSearch|UntilFound|Window|||214|
+89|If Image/Pixel Not Found||1|0|If_Statement|||||224|
+90|[Pause]||1|1000|Sleep|||||226|
+091|[MsgBox]|Buscando Esquina|1|0|MsgBox|0||||227|
+92|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022082733.png|1|0|ImageSearch||Window|||229|
+93|[End If]|EndIf|1|0|If_Statement|||||235|
+94|[Pause]||1|2000|Sleep|||||236|
+95|Control + f|{Control Down}{f}{Control Up}|1|0|Send|||||237|
+96|[Pause]||1|2000|Sleep|||||238|
+97|[Assign Variable]|Clipboard := %valor%|1|0|Variable|||||239|
+98|[Pause]||1|1000|Sleep|||||240|
+99|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||241|
+100|[Pause]||1|1000|Sleep|||||242|
+101|Enter|{Enter}|1|0|Send|||||243|
+102|[Pause]||1|2000|Sleep|||||244|
+0103|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022083430.png|1|0|ImageSearch||Window|||245|
+0104|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%encuentroValor.PNG|1|0|ImageSearch||Window|||251|
+105|Left Click, Continue, FoundX, FoundY, 0|0, 0, 1280, 1024, %pathImg%findValue.PNG|1|0|ImageSearch||Window|||256|
+106|[Pause]||1|200|Sleep|||||261|
+0107|[MsgBox]|%bccfiltro%`,%ErrorLevel%|1|0|MsgBox|0||||262|
+108|Evaluate Expression|bccfiltro==1 && ErrorLevel==0|1|0|If_Statement|UntilFound||||264|
+109|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||267|
+110|[Pause]||1|10000|Sleep|||||269|
+111|Control + f|{Control Down}{f}{Control Up}|1|0|Send|||||270|
+112|[Pause]||1|2000|Sleep|||||271|
+113|Continue, Continue, FoundX, FoundY|0, 0, 1280, 1024, 0x0078D7, 0, Fast RGB|1|0|PixelSearch||Window|||272|
+114|If Image/Pixel Not Found||1|0|If_Statement|||||274|
+115|Control + f|{Control Down}{f}{Control Up}|1|0|Send|||||276|
+116|[Pause]||1|2000|Sleep|||||277|
+117|[End If]|EndIf|1|0|If_Statement|||||278|
+118|[Assign Variable]|Clipboard := Agregar Llama|1|0|Variable|||||279|
+119|[Pause]||1|2000|Sleep|||||280|
+120|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||281|
+121|[Pause]||1|2000|Sleep|||||282|
+122|[Assign Variable]|startY := 0|1|0|Variable|||||283|
+123|[LoopStart]|LoopStart|2|0|Loop|||||284|
+124|Continue, Continue, FoundX, FoundY, 1|0, %startY%, 1920, 1080, %pathImg%Screen_20201022083533.png|1|0|ImageSearch||Window|||286|
+125|[Assign Variable]|startY := %FoundY%|1|0|Variable|||||289|
+126|[LoopEnd]|LoopEnd|1|0|Loop|||||290|
+127|[Pause]||1|500|Sleep|||||291|
+128|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||292|
+0129|[MsgBox]|%ErrorLevel%|1|0|MsgBox|0||||294|
+130|If Image/Pixel Not Found||1|0|If_Statement|||||296|
+131|[Assign Variable]|status := 0|1|0|Variable|||||299|
+132|[Pause]||1|3000|Sleep|||||300|
+133|Method:Navigate:|https://gco.crm2.dynamics.com/main.aspx|1|0|IECOM_Set|:|LoadWait|||301|
+0134|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022083610.png|1|0|ImageSearch|UntilFound|Window|||306|
+135|[Pause]||1|10000|Sleep|||||316|
+136|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022094907.png|1|0|ImageSearch|UntilFound|Window|||318|
+137|[Pause]||1|1000|Sleep|||||327|
+138|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022083735.png|1|0|ImageSearch|UntilFound|Window|||328|
+139|[End If]|EndIf|1|0|If_Statement|||||337|
+140|Evaluate Expression|%status%==1|1|0|If_Statement|UntilFound||||338|
+141|[Pause]||1|1000|Sleep|||||340|
+142|Enter|{Enter}|1|0|Send|||||341|
+143|[Pause]||1|1000|Sleep|||||342|
+144|[Assign Variable]|Clipboard := ""|1|0|Variable|||||343|
+145|[Pause]||1|2000|Sleep|||||344|
+0146|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022083826.png|1|0|ImageSearch|UntilFound|Window|||345|
+0147|[Pause]||1|2000|Sleep|||||355|
+0148|Control + c|{Control Down}{c}{Control Up}|2|0|Send|||||356|
+0149|[Pause]||1|2000|Sleep|||||357|
+0150|Control + c|{Control Down}{c}{Control Up}|1|0|Send|||||358|
+0151|[Pause]||1|2000|Sleep|||||359|
+0152|If Window Active|ahk_class #32770|1|0|If_Statement|Button2||||360|
+0153|Left Click|Left, 1,  NA|1|10|ControlClick|Button2|ahk_class #32770|||362|
+0154|[Pause]||1|2000|Sleep|||||364|
+0155|[End If]|EndIf|1|0|If_Statement|||||365|
+0156|Compare Variables|Clipboard = ""|1|0|If_Statement|||||366|
+157|[Assign Variable]|Clipboard := Radicado Devolucion de Dinero|1|0|Variable|||||368|
+0158|[MsgBox]|%Clipboard%|1|0|MsgBox|0||||370|
+0159|[End If]|EndIf|1|0|If_Statement|||||372|
+160|[Pause]||1|500|Sleep|||||373|
+161|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022083846.png|1|0|ImageSearch|UntilFound|Window|||375|
+162|[Pause]||1|2000|Sleep|||||384|
+163|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||385|
+164|[Pause]||1|3000|Sleep|||||386|
+165|[LoopStart]|LoopStart|7|0|Loop|||||387|
+166|Tab|{Tab}|1|0|Send|||||389|
+167|[Pause]||1|100|Sleep|||||390|
+168|[LoopEnd]|LoopEnd|1|0|Loop|||||391|
+169|[Assign Variable]|Clipboard := Hola, `n`nQueremos contarte que la devolución del dinero ya fue efectiva, te enviamos el comprobante de transferencia.`n`nCualquier inquietud adicional, con gusto será atendida.`n`nSERVICIO AL CLIENTE.|1|0|Variable|||||392|
+170|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||402|
+171|[Pause]||1|500|Sleep|||||403|
+0172|[MsgBox]|%pathImg%`,%pathDescargas%|1|0|MsgBox|0||||404|
+173|b64Jpg|_null := img,pathImg,pathDescargas|1|0|Function|||||406|
+174|[Pause]||1|1000|Sleep|||||408|
+175|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022083904.png|1|0|ImageSearch|UntilFound|Window|||409|
+176|[Pause]||1|2000|Sleep|||||418|
+177|Alt + Tab|{Alt Down}{Tab}{Alt Up}|1|0|Send|||||419|
+178|[Pause]||1|500|Sleep|||||420|
+179|Alt + Tab|{Alt Down}{Tab}{Alt Up}|1|0|Send|||||421|
+180|[Pause]||1|1000|Sleep|||||422|
+181|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022085611.png|1|0|ImageSearch|UntilFound|Window|||423|
+182|[Pause]||1|2000|Sleep|||||432|
+183|[Control]|%pathDescargas%test-download.png|1|0|ControlSetText|Edit1|ahk_class #32770|||433|
+184|[Pause]||1|4000|Sleep|||||434|
+185|Left Click|Left, 1,  NA|1|10|ControlClick|Button1|ahk_class #32770|||435|
+186|[Pause]||1|1000|Sleep|||||437|
+187|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022113123.png|1|0|ImageSearch|UntilFound|Window|||438|
+188|[Pause]||1|3000|Sleep|||||447|
+189|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20201022113437.png|1|0|ImageSearch|UntilFound|Window|||448|
+190|[Pause]||1|4000|Sleep|||||457|
+191|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201022084057.png|1|0|ImageSearch|UntilFound|Window|||458|
+192|[Pause]||1|6000|Sleep|||||467|
+193|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200924033234.png|1|0|ImageSearch||Window|||468|
+194|[Pause]||1|2000|Sleep|||||473|
+0195|Continue, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201008135352.png|1|0|ImageSearch||Window|||474|
+0196|[Pause]||1|1000|Sleep|||||478|
+197|Continue, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, C:\img\confirmarRC0.PNG|1|0|ImageSearch||Window|||479|
+198|[Pause]||1|500|Sleep|||||483|
+199|If Image/Pixel Found||1|0|If_Statement|||||484|
+200|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||486|
+201|[End If]|EndIf|1|0|If_Statement|||||488|
+202|[Pause]||1|1000|Sleep|||||489|
+203|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||490|
+204|[Pause]||1|1500|Sleep|||||499|
+205|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20201007154153.png|1|0|ImageSearch||Window|||500|
+206|[Pause]||1|1000|Sleep|||||505|
+207|If Image/Pixel Found||1|0|If_Statement|UntilFound||||506|
+208|Enter|{Enter}|1|0|Send|||||508|
+209|[Pause]||1|1000|Sleep|||||509|
+210|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, C:\img\Resolucion2.PNG|1|0|ImageSearch|UntilFound|Window|||510|
+211|[Pause]||1|1000|Sleep|||||519|
+212|[Assign Variable]|Clipboard := Resuelto.|1|0|Variable|||||520|
+213|[Pause]||1|1000|Sleep|||||521|
+214|Control + v|{Control Down}{v}{Control Up}|1|0|Send|||||522|
+215|[Pause]||1|500|Sleep|||||523|
+216|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200924082550.png|1|0|ImageSearch|UntilFound|Window|||524|
+217|[Pause]||1|2000|Sleep|||||533|
+218|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, C:\img\ResolverZ.PNG|1|0|ImageSearch|UntilFound|Window|||534|
+219|[Pause]||1|3000|Sleep|||||543|
+220|[Else]|Else|1|0|If_Statement|||||544|
+221|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200924082550.png|1|0|ImageSearch|UntilFound|Window|||547|
+222|[End If]|EndIf|1|0|If_Statement|||||556|
+0223|[Pause]||1|2000|Sleep|||||557|
+0224|[MsgBox]|inicia Buscque de imagen X|1|0|MsgBox|0||||559|
+0225|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%xmessage.PNG|1|0|ImageSearch|UntilFound|Window|||560|
+0226|[Pause]||1|2000|Sleep|||||569|
+0227|If Window Active|Mensaje de página web|1|0|If_Statement|Button1||||570|
+0228|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%aceptarMesX.PNG|1|0|ImageSearch|UntilFound|Window|||572|
+0229|Left Click|Left, 1,  NA|1|10|ControlClick|Button1|Mensaje de página web|||581|
+230|[Pause]||1|1000|Sleep|||||583|
+0231|[End If]|EndIf|1|0|If_Statement|||||585|
+232|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%xmessage.PNG|1|0|ImageSearch|UntilFound|Window|||587|
+0233|Left Move & Click|%FoundX%, %FoundY% Left, 1|1|10|Click|||||597|
+234|[Pause]||1|1000|Sleep|||||600|
+0235|[MsgBox]|a continuacion se minimiza pestaña|1|0|MsgBox|0||||602|
+236|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||604|
+237|[Pause]||1|2000|Sleep|||||614|
+238|[End If]|EndIf|1|0|If_Statement|||||615|
+239|[Else]|Else|1|0|If_Statement|||||616|
+240|[Assign Variable]|status := 0|1|0|Variable|||||619|
+241|[Pause]||1|3000|Sleep|||||620|
+242|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1280, 1024, %pathImg%Screen_20200923182420.png|1|0|ImageSearch|UntilFound|Window|||621|
+243|[Pause]||1|10000|Sleep|||||630|
+244|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200924143844.png|1|0|ImageSearch|UntilFound|Window|||631|
+245|[Pause]||1|1000|Sleep|||||640|
+246|Left Click, Continue, FoundX, FoundY, 1|0, 0, 1920, 1080, %pathImg%Screen_20200918143624.png|1|0|ImageSearch|UntilFound|Window|||641|
+247|[Pause]||1|1000|Sleep|||||650|
+248|[End If]|EndIf|1|0|If_Statement|||||651|
+249|[FuncReturn]|status|1|0|FuncReturn|||||652|
+
